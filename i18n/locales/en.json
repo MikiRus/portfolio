@@ -61,7 +61,7 @@
     "start": "Start",
     "open": "Open in Safari",
     "sandbox": "Sandbox",
-    "sandboxNote": "This is a simulated start for now. Real time-limited containers are coming soon.",
+    "sandboxNote": "This start is simulated: the code is commercial and private. Live demos that really start are in the Demos folder.",
     "status": {
       "pulling": "Pulling image",
       "starting": "Starting",
