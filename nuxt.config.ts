@@ -11,6 +11,9 @@ export default defineNuxtConfig({
   // Шрифты скачиваются при сборке и отдаются с нашего домена с preload,
   // а запасной шрифт подгоняется по метрикам — без мигания при первой загрузке.
   fonts: {
+    // Только Google: остальные провайдеры модуль опрашивает в поисках системных
+    // шрифтов из цепочки (Segoe UI, Arial), а Fontshare с сервера недоступен.
+    providers: { fontshare: false, bunny: false, fontsource: false, adobe: false, npm: false },
     families: [
       { name: 'Onest', provider: 'google', weights: [400, 500, 600, 700], subsets: ['cyrillic', 'latin'], preload: true },
       { name: 'JetBrains Mono', provider: 'google', weights: [400, 600], subsets: ['cyrillic', 'latin'] },
