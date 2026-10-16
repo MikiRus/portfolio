@@ -11,64 +11,59 @@ const pg = (v: string, db: string) => ({
 export const projects: Project[] = [
   // ─── E-commerce ───────────────────────────────────────────────
   {
-    id: 'monolith',
+    id: 'core',
     folder: 'ecommerce',
-    name: 'monolith',
-    short: 'Mo',
+    name: 'core',
+    short: 'Co',
     colors: ['#5f3dc4', '#9775fa'],
     kind: 'back',
     url: 'localhost:50051',
     period: { ru: '2025 — сейчас', en: '2025 — present' },
-    role: { ru: 'Бэкенд-разработчик, один из основных авторов', en: 'Backend developer, one of the core authors' },
+    role: { ru: 'Основной разработчик', en: 'Lead developer' },
     tagline: {
-      ru: 'gRPC-ядро e-commerce платформы Garlyn: заказы, оплата, доставка, лояльность, каталог',
-      en: 'The gRPC core of the Garlyn e-commerce platform: orders, payments, delivery, loyalty, catalog',
+      ru: 'Центральная система компании Garlyn: товар от закупки до продажи на сайтах, в приложении и на маркетплейсах',
+      en: "Garlyn's central system: a product's whole path from purchasing to sale on websites, in the app and on marketplaces",
     },
     task: {
-      ru: 'Собрать бизнес-логику магазина, админки, мобильного приложения и маркетплейсов в одном сервисе с понятными границами доменов, чтобы сайты и каналы продаж работали поверх общего ядра.',
-      en: 'Bring the business logic of the store, admin panel, mobile app and marketplaces into one service with clear domain boundaries, so every website and sales channel runs on a shared core.',
+      ru: 'Центральная система компании для ведения товара и его сопровождения от закупки до продажи на разных платформах. Здесь живут каталог и контент для всех витрин, остатки на складах, заказы, клиенты и платежи, управление сайтами и мобильным приложением и вся работа с внешними сервисами.',
+      en: "The company's central system that carries a product from purchasing to sale on every platform. It holds the catalog and content for all storefronts, warehouse stock, orders, customers and payments, website and mobile app management, and every external integration.",
     },
     done: [
-      {
-        ru: 'Checkout, оплата и доставка: Альфа-эквайринг, Сбер и T-Bank BNPL, рассрочка, кошелёк WB, чеки через АТОЛ; CDEK, 5Post, Ozon, Почта России, Яндекс',
-        en: 'Checkout, payments and delivery: Alfa acquiring, Sber and T-Bank BNPL, installments, WB wallet, receipts via ATOL; CDEK, 5Post, Ozon, Russian Post, Yandex',
-      },
-      {
-        ru: 'Импорт и синхронизация каталога с маркетплейсами, включая LLM-синк свойств товаров в атрибуты Ozon/WB с детерминированной проверкой и CLI для оценки качества',
-        en: 'Catalog import and marketplace sync, including LLM-based mapping of product properties to Ozon/WB attributes with deterministic validation and a CLI to score quality',
-      },
-      {
-        ru: 'Интеграция с RetailCRM и Mindbox, подарочные сертификаты, лояльность',
-        en: 'RetailCRM and Mindbox integration, gift certificates, loyalty',
-      },
-      { ru: 'Внешний API для партнёров: журнал запросов и индивидуальные лимиты', en: 'A partner API with request logging and per-client limits' },
+      { ru: 'Каталог и контент: карточки, категории и атрибуты, наполнение контента под каждую витрину — сайты, приложение, маркетплейсы', en: 'Catalog and content: product cards, categories and attributes, content tailored for every storefront — websites, the app, marketplaces' },
+      { ru: 'Склады и остатки: учёт по складам, резервы под заказы, синхронизация со складскими системами и передача остатков на витрины', en: 'Warehouses and stock: per-warehouse stock, order reservations, sync with warehouse systems and stock push to storefronts' },
+      { ru: 'Заказы со всех каналов — сайтов, приложения и маркетплейсов — в одной модели статусов, обмен с RetailCRM в обе стороны', en: 'Orders from every channel — websites, the app, marketplaces — in one status model, two-way exchange with RetailCRM' },
+      { ru: 'Платёжный шлюз: Альфа-эквайринг, Сбер BNPL, T-Bank BNPL и рассрочка, кошелёк WB; фискальные чеки через АТОЛ, возвраты и сверка статусов', en: 'Payment gateway: Alfa acquiring, Sber BNPL, T-Bank BNPL and installments, WB wallet; fiscal receipts via ATOL, refunds and status reconciliation' },
+      { ru: 'Доставка: Apiship, CDEK (курьер и ПВЗ), 5Post, Магнит, Ozon, Почта России, Яндекс Доставка — расчёт, пункты выдачи, создание отправлений и трекинг', en: 'Delivery: Apiship, CDEK (courier and pickup), 5Post, Magnit, Ozon, Russian Post, Yandex Delivery — quotes, pickup points, shipment creation and tracking' },
+      { ru: 'Клиенты и лояльность: профили, бонусные счета с лотами, подарочные сертификаты, акции и правила списания', en: 'Customers and loyalty: profiles, bonus accounts with lots, gift certificates, promotions and redemption rules' },
+      { ru: 'Управление витринами и мобильным приложением: настройки сайтов, контент, отдельный адаптер для приложения', en: 'Storefront and mobile app management: website settings, content, a dedicated adapter for the app' },
+      { ru: 'Маркетплейсы: клиенты Ozon, Wildberries и Яндекс.Маркета, LLM-синк свойств товаров в атрибуты маркетплейсов с проверкой и CLI для оценки качества', en: 'Marketplaces: Ozon, Wildberries and Yandex Market clients, LLM mapping of product properties to marketplace attributes with validation and a quality-scoring CLI' },
+      { ru: 'Внешние сервисы: RetailCRM, LiveSklad, DaData, Mindbox, банки и службы доставки', en: 'External services: RetailCRM, LiveSklad, DaData, Mindbox, banks and delivery services' },
+      { ru: 'Уведомления по email, SMS и в Telegram; поиск по каталогу на OpenSearch; фиды для партнёров', en: 'Email, SMS and Telegram notifications; catalog search on OpenSearch; partner feeds' },
+      { ru: 'Роли и права, аудит изменений карточек, внешний API для партнёров с журналом запросов и лимитами', en: 'Roles and permissions, an audit log of product changes, a partner API with request logging and rate limits' },
+      { ru: 'Служебные CLI: сверка каталога, дедупликация, перенос маппингов маркетплейсов, синк с CRM', en: 'Maintenance CLIs: catalog diff, deduplication, marketplace mapping migration, CRM sync' },
     ],
     architecture: [
-      {
-        ru: 'Clean architecture по доменам: domain → port → usecase → adapter → transport, сборка зависимостей только в main',
-        en: 'Clean architecture per domain: domain → port → usecase → adapter → transport, wiring only in main',
-      },
-      {
-        ru: 'Transactional outbox: события пишутся в той же транзакции, воркер отправляет их в RabbitMQ; несколько инстансов не мешают друг другу',
-        en: 'Transactional outbox: events are written in the same transaction and a worker ships them to RabbitMQ; several instances run safely side by side',
-      },
-      { ru: 'OpenTelemetry-спан на каждом use case, cron-задачи только на одном инстансе', en: 'An OpenTelemetry span on every use case; cron jobs run on a single instance' },
+      { ru: 'Clean architecture по доменам: domain → port → usecase → adapter → transport, сборка зависимостей только в main', en: 'Clean architecture per domain: domain → port → usecase → adapter → transport, wiring only in main' },
+      { ru: 'RabbitMQ как шина событий между core, маркетплейсами и интеграциями; transactional outbox: событие пишется в той же транзакции, что и данные', en: 'RabbitMQ as the event bus between core, marketplaces and integrations; a transactional outbox writes each event in the same transaction as the data' },
+      { ru: 'gRPC-сервисы наружу через gateway, хранилища: PostgreSQL, Redis, S3, OpenSearch', en: 'gRPC services exposed through the gateway; storage: PostgreSQL, Redis, S3, OpenSearch' },
+      { ru: 'OpenTelemetry-спан на каждом use case: логи, метрики и трейсы уходят в общую телеметрию', en: 'An OpenTelemetry span on every use case: logs, metrics and traces go to the shared telemetry stack' },
     ],
     stack: ['Go 1.25', 'gRPC', 'PostgreSQL', 'Redis', 'RabbitMQ', 'OpenSearch', 'S3', 'OpenTelemetry'],
     stats: [
       { value: '45', label: { ru: 'домены', en: 'domains' } },
-      { value: '≈135k', label: { ru: 'строки Go', en: 'lines of Go' } },
+      { value: '42', label: { ru: 'gRPC-сервисы', en: 'gRPC services' } },
       { value: '109', label: { ru: 'миграции', en: 'migrations' } },
       { value: '267', label: { ru: 'мои коммиты', en: 'my commits' } },
     ],
     containers: [
       pg('18', 'ecom'),
       { name: 'redis', image: 'redis:8.2', logs: ['Redis version=8.2.1, bits=64', 'Ready to accept connections tcp'] },
+      { name: 'rabbitmq', image: 'rabbitmq:4-management', logs: ['Server startup complete; 4 plugins started', 'accepting AMQP connection'] },
       {
         name: 'app',
-        image: 'garlyn/monolith',
+        image: 'garlyn/core',
         port: ':50051',
-        logs: ['migrations: up to date (000109)', 'registered 42 gRPC services', 'outbox worker started, batch=50 every=10s', 'gRPC server listening on :50051'],
+        logs: ['migrations: up to date (000109)', 'registered 42 gRPC services', 'outbox worker started → rabbitmq', 'gRPC server listening on :50051'],
       },
     ],
   },
@@ -103,7 +98,7 @@ export const projects: Project[] = [
       { ru: 'Журнал запросов внешнего API, который не держит в памяти файлы и большие ответы', en: 'A request log for the partner API that never buffers files or large responses' },
     ],
     architecture: [
-      { ru: 'grpc-gateway: 44 сервиса ядра опубликованы как REST', en: 'grpc-gateway: 44 core services exposed as REST' },
+      { ru: 'grpc-gateway: 44 сервиса core опубликованы как REST', en: 'grpc-gateway: 44 core services exposed as REST' },
       {
         ru: 'Цепочка middleware: JWT, проверка прав, CORS, client IP, identity-заголовки, телеметрия',
         en: 'Middleware chain: JWT, permission checks, CORS, client IP, identity headers, telemetry',
@@ -113,7 +108,6 @@ export const projects: Project[] = [
     stack: ['Go 1.25', 'grpc-gateway', 'JWT', 'OpenAPI', 'Traefik', 'OpenTelemetry'],
     stats: [
       { value: '44', label: { ru: 'сервисы за шлюзом', en: 'services behind it' } },
-      { value: '≈7.9k', label: { ru: 'строки Go', en: 'lines of Go' } },
       { value: '126', label: { ru: 'мои коммиты', en: 'my commits' } },
     ],
     containers: [
@@ -122,7 +116,7 @@ export const projects: Project[] = [
         name: 'app',
         image: 'garlyn/gateway',
         port: ':8080',
-        logs: ['upstream monolith:50051 healthy', 'rate limiter: 12 API clients loaded', 'OpenAPI spec served at /api/openapi.json', 'HTTP server listening on :8080'],
+        logs: ['upstream core:50051 healthy', 'rate limiter: 12 API clients loaded', 'OpenAPI spec served at /api/openapi.json', 'HTTP server listening on :8080'],
       },
     ],
   },
@@ -141,24 +135,24 @@ export const projects: Project[] = [
       en: 'A monorepo of 11 Go services: catalog, stock and orders for Ozon, Wildberries, Yandex Market and more',
     },
     task: {
-      ru: 'Подключить каталог и склад бренда к маркетплейсам так, чтобы заказы попадали в RetailCRM, статусы возвращались обратно, а падение одного канала не задевало остальные.',
-      en: "Connect the brand's catalog and warehouse to marketplaces so orders land in RetailCRM, statuses flow back, and one failing channel never affects the others.",
+      ru: 'Подключить каталог и склад бренда к маркетплейсам так, чтобы заказы попадали в core и RetailCRM, статусы возвращались обратно, а падение одного канала не задевало остальные.',
+      en: "Connect the brand's catalog and warehouse to marketplaces so orders land in core and RetailCRM, statuses flow back, and one failing channel never affects the others.",
     },
     done: [
       { ru: 'Ozon: FBO, FBS и FBP, мультикабинет — цены, картинки и рич-контент по кабинетам', en: 'Ozon: FBO, FBS and FBP, multiple seller accounts with per-account prices, images and rich content' },
       { ru: 'Wildberries: FBW и FBS, автосборка, стикеры', en: 'Wildberries: FBW and FBS, auto-assembly, labels' },
       { ru: 'ВсеИнструменты по EDI через Контур: ORDERS → ORDRSP → DESADV', en: 'VseInstrumenty over EDI via Kontur: ORDERS → ORDRSP → DESADV' },
+      { ru: 'Заказы маркетплейсов попадают в core и в RetailCRM, статусы из CRM возвращаются на площадку', en: 'Marketplace orders land in core and RetailCRM; statuses from the CRM flow back to the marketplace' },
       { ru: 'Планировщики синка заказов, статусов и остатков; один битый заказ не останавливает выгрузку', en: 'Schedulers for orders, statuses and stock; one broken order never blocks the export' },
     ],
     architecture: [
       { ru: 'Каждый канал — отдельный сервис со своей базой PostgreSQL', en: 'Each channel is a separate service with its own PostgreSQL database' },
-      { ru: 'Общие RetailCRM и gRPC-ядро, события через RabbitMQ', en: 'Shared RetailCRM and gRPC core, events via RabbitMQ' },
+      { ru: 'Заказы и остатки — через gRPC к core и RetailCRM, события через RabbitMQ', en: 'Orders and stock go to core over gRPC and to RetailCRM; events via RabbitMQ' },
       { ru: 'traceparent пробрасывается в gRPC, у каждого сервиса своё имя в телеметрии', en: 'traceparent is propagated over gRPC, every service has its own telemetry name' },
     ],
     stack: ['Go 1.25', 'PostgreSQL', 'RabbitMQ', 'gRPC', 'EDI', 'cron', 'OpenTelemetry'],
     stats: [
       { value: '11', label: { ru: 'каналы продаж', en: 'sales channels' } },
-      { value: '≈78k', label: { ru: 'строки Go', en: 'lines of Go' } },
       { value: '157', label: { ru: 'миграции', en: 'migrations' } },
       { value: '198', label: { ru: 'мои коммиты', en: 'my commits' } },
     ],
@@ -186,14 +180,14 @@ export const projects: Project[] = [
       en: 'The e-commerce platform admin: catalog, orders, loyalty, 9 marketplaces, roles and service monitoring in one interface',
     },
     task: {
-      ru: 'Дать команде один интерфейс ко всему ядру и его сервисам: от карточки товара до передачи остатков на маркетплейсы, с правами по ролям. Живая копия меню на выдуманных данных — в папке «Демо», ecommerce-demo.',
+      ru: 'Дать команде один интерфейс ко всему core и его сервисам: от карточки товара до передачи остатков на маркетплейсы, с правами по ролям. Живая копия меню на выдуманных данных — в папке «Демо», ecommerce-demo.',
       en: 'Give the team one interface to the whole core and its services, from product cards to pushing stock to marketplaces, with role-based access. A live copy of the menu on made-up data is in the Demos folder: ecommerce-demo.',
     },
     done: [
       { ru: 'Разделы маркетплейсов: кабинеты, передача остатков, журнал синхронизаций и заказы по каждому каналу', en: 'Marketplace sections: accounts, stock push, sync log and orders per channel' },
       { ru: 'Лояльность: бонусные счета с лотами и историей, ручные начисления, подарочные сертификаты, правила списания', en: 'Loyalty: bonus accounts with lots and history, manual accruals, gift certificates, redemption rules' },
       { ru: 'Короткие ссылки с QR-кодами и статистикой переходов, клиенты API с лимитами', en: 'Short links with QR codes and click stats, API clients with rate limits' },
-      { ru: 'Состояние сервисов: живая проверка ядра, хранилищ и внешних интеграций', en: 'Service health: a live check of the core, storage and external integrations' },
+      { ru: 'Состояние сервисов: живая проверка core, хранилищ и внешних интеграций', en: 'Service health: a live check of the core, storage and external integrations' },
     ],
     architecture: [
       { ru: 'Nuxt 4 SPA + Nuxt UI 4, Nitro как BFF к gateway', en: 'Nuxt 4 SPA + Nuxt UI 4, Nitro as a BFF to the gateway' },
@@ -233,6 +227,7 @@ export const projects: Project[] = [
       { ru: 'Скачивание QR-кода файлом для печати на коробках и в инструкциях', en: 'QR code download as a file for printing on boxes and manuals' },
       { ru: 'Статистика: переходы людей и ботов отдельно, график по дням, источники и последние переходы', en: 'Analytics: humans and bots counted separately, a daily chart, sources and latest visits' },
       { ru: 'Маршруты в gateway с правами short_link.view и short_link.manage и проверка сервиса на карте состояния', en: 'Gateway routes with short_link.view and short_link.manage permissions, plus the service on the health map' },
+      { ru: 'API для других систем: например, CRM блогеров сама получает готовые ссылки на страницы товаров', en: 'An API for other systems: for example, the blogger CRM fetches ready links to product pages by itself' },
     ],
     architecture: [
       { ru: 'Отдельный сервис за gateway: админка ходит через общий API с RBAC', en: 'A separate service behind the gateway: the admin talks to it through the shared RBAC-protected API' },
@@ -250,6 +245,46 @@ export const projects: Project[] = [
     ],
   },
 
+  {
+    id: 'telemetry',
+    folder: 'ecommerce',
+    name: 'telemetry',
+    short: 'Tm',
+    colors: ['#b45309', '#f59e0b'],
+    kind: 'back',
+    url: 'localhost:3000/grafana',
+    period: { ru: '2025 — сейчас', en: '2025 — present' },
+    role: { ru: 'Настройка и подключение сервисов', en: 'Setup and service onboarding' },
+    tagline: {
+      ru: 'Телеметрия всей платформы в одном месте: логи всех сервисов, нагрузка на серверы и базы, количество и скорость запросов',
+      en: 'Telemetry for the whole platform in one place: logs from every service, server and database load, request counts and latency',
+    },
+    task: {
+      ru: 'Когда сервисов больше десятка, ошибку в логах одного контейнера не найти. Нужно одно место, где видны логи всех сервисов, нагрузка на серверы и базы данных, сколько запросов приходит и как быстро на них отвечают.',
+      en: "With more than a dozen services you can't hunt for an error in one container's logs. The team needs one place showing logs from every service, server and database load, how many requests arrive and how fast they are served.",
+    },
+    done: [
+      { ru: 'Общий Go-модуль telemetry: сервис подключается одной секцией конфига и сам отправляет логи, метрики и трейсы по OTLP', en: 'A shared Go telemetry module: a service plugs in with one config section and ships logs, metrics and traces over OTLP' },
+      { ru: 'Логи всех сервисов в Loki: поиск по сервису, уровню и trace id', en: 'Logs from every service in Loki: search by service, level and trace id' },
+      { ru: 'Дашборды Grafana: нагрузка на серверы, базы данных, количество запросов, скорость ответов и ошибки', en: 'Grafana dashboards: server load, databases, request counts, latency and errors' },
+      { ru: 'Сквозные трейсы: один запрос виден целиком — gateway, core, маркетплейсы', en: 'End-to-end traces: one request is visible across gateway, core and marketplaces' },
+    ],
+    architecture: [
+      { ru: 'Сервисы → OpenTelemetry SDK → OTLP gRPC → коллектор → Loki и метрики → Grafana', en: 'Services → OpenTelemetry SDK → OTLP gRPC → collector → Loki and metrics → Grafana' },
+      { ru: 'Метрики PostgreSQL, Redis и RabbitMQ рядом с метриками сервисов: видно, где узкое место', en: 'PostgreSQL, Redis and RabbitMQ metrics next to service metrics: you see where the bottleneck is' },
+      { ru: 'У каждого сервиса своё имя и версия в телеметрии, traceparent передаётся через gRPC и HTTP', en: 'Every service reports its own name and version; traceparent travels over gRPC and HTTP' },
+    ],
+    stack: ['Grafana', 'Loki', 'OpenTelemetry', 'OTLP', 'Go'],
+    stats: [
+      { value: '3', label: { ru: 'сигнала: логи, метрики, трейсы', en: 'signals: logs, metrics, traces' } },
+    ],
+    containers: [
+      { name: 'otel-collector', image: 'otel/opentelemetry-collector-contrib', port: ':4317', logs: ['Starting GRPC server endpoint=0.0.0.0:4317', 'Everything is ready. Begin running and processing data.'] },
+      { name: 'loki', image: 'grafana/loki', port: ':3100', logs: ['Loki started', 'ingester: ready'] },
+      { name: 'grafana', image: 'grafana/grafana', port: ':3000', logs: ['HTTP Server Listen address=[::]:3000', 'datasources provisioned: Loki'] },
+    ],
+  },
+
   // ─── Сайты ────────────────────────────────────────────────────
   {
     id: 'garlyn',
@@ -262,20 +297,30 @@ export const projects: Project[] = [
     period: { ru: '2023 — сейчас', en: '2023 — present' },
     role: { ru: 'Fullstack-разработчик, веду релизы', en: 'Fullstack developer, release owner' },
     tagline: {
-      ru: 'Интернет-магазин бытовой техники Garlyn: SSR-витрина, рецепты и блог, админка для контента и заказов',
-      en: 'The Garlyn home appliance store: SSR storefront, recipes and blog, admin panel for content and orders',
+      ru: 'Интернет-магазин бытовой техники Garlyn: SSR-витрина, полная админка, гарантия и сервис, аналитика в ClickHouse и Mindbox',
+      en: 'The Garlyn home appliance store: SSR storefront, a full admin panel, warranty and service pages, analytics in ClickHouse and Mindbox',
     },
     task: {
-      ru: 'Развивать магазин с высокой нагрузкой и десятками интеграций и при этом постепенно переносить логику в Go-ядро, не останавливая продажи.',
-      en: 'Grow a high-traffic store with dozens of integrations while gradually moving its logic into the Go core without stopping sales.',
+      ru: 'Развивать магазин с высокой нагрузкой и десятками интеграций, дать команде админку для всего сайта и при этом постепенно переносить логику в core, не останавливая продажи.',
+      en: 'Grow a high-traffic store with dozens of integrations, give the team an admin panel for the whole site, and gradually move its logic into core without stopping sales.',
     },
     done: [
-      { ru: 'Фичи витрины и админки: подарочные сертификаты, оформление заказа, личный кабинет', en: 'Storefront and admin features: gift certificates, checkout, customer account' },
+      {
+        ru: 'Админка сайта целиком: товары, категории, вариации и бейджи товаров, акции, промо-каталоги, купоны и товар дня, заказы, платежи и службы доставки, клиенты и группы, рецепты, блог, документы, сервисные центры, доп. гарантия, email-рассылки, медиа, пользователи, роли и права, история изменений',
+        en: 'The whole site admin: products, categories, product variations and badges, promotions, promo catalogs, coupons and deal of the day, orders, payments and delivery services, customers and groups, recipes, blog, documents, service centers, extended warranty, emails, media, users, roles and permissions, change history',
+      },
+      { ru: 'Вариации товаров (цвета и модификации) и бейджи на карточках — от админки до витрины', en: 'Product variations (colors and models) and badges on product cards — from the admin to the storefront' },
+      { ru: 'Страницы гарантии и сервиса: гарантия 5 лет, регистрация доп. гарантии, сервисные центры по городам', en: 'Warranty and service pages: 5-year warranty, extended warranty registration, service centers by city' },
+      {
+        ru: 'Сбор данных: события в ClickHouse для аналитики; Mindbox — клиенты, заказы, корзина, просмотры товаров, брошенное оформление, трек-номера, гарантия и бонусы',
+        en: 'Data collection: events into ClickHouse for analytics; Mindbox — customers, orders, cart, product views, abandoned checkout, tracking numbers, warranty and bonuses',
+      },
+      { ru: 'Подарочные сертификаты, оформление заказа, личный кабинет', en: 'Gift certificates, checkout, customer account' },
       { ru: 'Шесть платёжных провайдеров за единым PaymentService с фоновой сверкой статусов', en: 'Six payment providers behind one PaymentService with background status polling' },
       { ru: 'Доставка через общий интерфейс: Apiship, ПВЗ Ozon, Почта России, собственная доставка', en: 'Delivery behind one interface: Apiship, Ozon pickup points, Russian Post, own couriers' },
       {
-        ru: 'Переключение лояльности на сервис ядра под фичефлагом с ночной сверкой; импорт карточек из Go-ядра',
-        en: 'Switched loyalty to the core service behind a feature flag with nightly reconciliation; product import from the Go core',
+        ru: 'Переключение лояльности на сервис core под фичефлагом с ночной сверкой; импорт карточек из core',
+        en: 'Switched loyalty to the core service behind a feature flag with nightly reconciliation; product import from core',
       },
       { ru: 'RetailCRM, фиды для маркетплейсов и партнёров, sitemap, синк остатков', en: 'RetailCRM, feeds for marketplaces and partners, sitemap, stock sync' },
     ],
@@ -284,11 +329,11 @@ export const projects: Project[] = [
       { ru: 'Inertia + Vue 3 с SSR, отдельные входы для витрины и админки', en: 'Inertia + Vue 3 with SSR, separate entry points for storefront and admin' },
       { ru: 'Деплой из GitLab CI на две веб-ноды и отдельную фоновую ноду', en: 'GitLab CI deploys to two web nodes and a separate background node' },
     ],
-    stack: ['PHP 8.2', 'Laravel 10', 'Vue 3', 'Inertia SSR', 'PostgreSQL', 'Redis', 'Vite'],
+    stack: ['PHP 8.2', 'Laravel 10', 'Vue 3', 'Inertia SSR', 'PostgreSQL', 'Redis', 'ClickHouse', 'Mindbox'],
     stats: [
       { value: '162', label: { ru: 'страницы Inertia', en: 'Inertia pages' } },
+      { value: '50', label: { ru: 'страницы админки', en: 'admin pages' } },
       { value: '141', label: { ru: 'миграции', en: 'migrations' } },
-      { value: '≈43', label: { ru: 'фоновые задачи', en: 'background jobs' } },
       { value: '1041', label: { ru: 'мои коммиты', en: 'my commits' } },
     ],
     containers: [
@@ -313,21 +358,26 @@ export const projects: Project[] = [
     period: { ru: '2025 — сейчас', en: '2025 — present' },
     role: { ru: 'Разработчик в команде: витрина, админка и их BFF', en: 'Developer on the team: storefront, admin and their BFF' },
     tagline: {
-      ru: 'Витрина и админка на Nuxt поверх общего Go-бэкенда: каталог, корзина, checkout, кабинет, лояльность',
-      en: 'A Nuxt storefront and admin panel on top of the shared Go backend: catalog, cart, checkout, account, loyalty',
+      ru: 'Витрина и админка бренда Stoewer на Nuxt: каталог, корзина, checkout с доставкой, кабинет, лояльность и обмен с CRM',
+      en: 'The Stoewer storefront and admin on Nuxt: catalog, cart, checkout with delivery, account, loyalty and CRM exchange',
     },
     task: {
-      ru: 'Сделать второй сайт на той же платформе, не дублируя бэкенд: витрина и админка ходят в gateway через свой BFF.',
-      en: 'Ship a second website on the same platform without duplicating the backend: the storefront and admin talk to the gateway through their own BFF.',
+      ru: 'Запустить сайт второго бренда: витрина с полноценным оформлением заказа и доставкой, админка для команды и обмен данными с CRM в обе стороны.',
+      en: 'Launch the second brand\'s website: a storefront with full checkout and delivery, an admin panel for the team and two-way data exchange with the CRM.',
     },
     done: [
       { ru: 'Админка: товары, категории, пользователи, пагинация', en: 'Admin: products, categories, users, pagination' },
-      { ru: 'Витрина: адрес курьерской доставки в checkout, страница дополнительной гарантии, личный кабинет', en: 'Storefront: courier address in checkout, extended warranty page, customer account' },
-      { ru: 'Серверные ручки BFF в Nitro для админки', en: 'Nitro BFF endpoints for the admin panel' },
+      {
+        ru: 'Блок доставки в checkout целиком: Москва и регионы, курьер и пункты выдачи на карте, расчёт через CDEK, подсказки адресов DaData, выбор способа оплаты',
+        en: 'The whole delivery block in checkout: Moscow and regions, courier and pickup points on a map, CDEK quotes, DaData address suggestions, payment method choice',
+      },
+      { ru: 'Связь с CRM: обмен данными в обе стороны — заказы и клиенты уходят в CRM, статусы возвращаются на сайт', en: 'CRM link: two-way data exchange — orders and customers go to the CRM, statuses come back to the site' },
+      { ru: 'Страница дополнительной гарантии и личный кабинет', en: 'Extended warranty page and customer account' },
+      { ru: 'Серверная часть на Nitro: API для витрины и админки, интеграции CDEK и DaData на сервере', en: 'Server side on Nitro: APIs for the storefront and admin, CDEK and DaData integrations server-side' },
     ],
     architecture: [
       { ru: 'Два Nuxt-приложения: client и admin', en: 'Two Nuxt apps: client and admin' },
-      { ru: 'Nitro как BFF-прокси к gateway, адрес API не попадает в браузер', en: 'Nitro as a BFF proxy to the gateway, the API address never reaches the browser' },
+      { ru: 'Nitro-сервер у каждого приложения: ключи CDEK и DaData и адрес API бэкенда не попадают в браузер', en: 'A Nitro server in each app: CDEK and DaData keys and the backend API address never reach the browser' },
       { ru: 'Яндекс.Метрика с e-commerce dataLayer, прод за Traefik', en: 'Yandex Metrica with an e-commerce dataLayer, Traefik in production' },
     ],
     stack: ['Nuxt 3', 'Vue 3', 'Tailwind', 'Nuxt UI', 'Nitro BFF'],
@@ -366,6 +416,11 @@ export const projects: Project[] = [
       { ru: 'Кампании, интеграции, плановые показатели, календарь, аналитика и Excel-отчёты', en: 'Campaigns, integrations, targets, calendar, analytics and Excel reports' },
       { ru: 'Выручка по промокодам и UTM из RetailCRM, сверка рекламных отчётов Ozon', en: 'Promo-code and UTM revenue from RetailCRM, reconciliation of Ozon ad reports' },
       { ru: 'Маркировка рекламы через ОРД Ozon: контрагенты, договоры, креативы', en: 'Ad labeling via the Ozon ORD: counterparties, contracts, creatives' },
+      {
+        ru: 'Готовая ссылка для блогера без ручной работы: CRM сама берёт по API у сервиса коротких ссылок ссылку на страницу товара с метками',
+        en: 'A ready link for each blogger with no manual work: the CRM asks the short-link service API for a tagged link to the product page',
+      },
+      { ru: 'Отслеживание заказов с сайта и повторных заказов этих клиентов — видно, кто вернулся после интеграции', en: 'Tracking site orders and repeat orders from those customers — you see who came back after an integration' },
       { ru: 'Агентский API с llms.txt для ИИ-ассистентов сотрудников', en: 'An agent API with llms.txt for staff AI assistants' },
     ],
     architecture: [
@@ -373,14 +428,15 @@ export const projects: Project[] = [
         ru: 'Nuxt 4 SPA + Nitro BFF: токены в httpOnly-cookie, обновление access-токена на сервере',
         en: 'Nuxt 4 SPA + Nitro BFF: tokens in httpOnly cookies, access-token refresh on the server',
       },
-      { ru: 'Go на stdlib: 16 доменов, ≈148 маршрутов, два пула Postgres (свой и read-only к БД сайта)', en: 'Go on the stdlib: 16 domains, ≈148 routes, two Postgres pools (own and read-only to the site DB)' },
+      { ru: 'Go на stdlib: 16 доменов, ≈148 маршрутов', en: 'Go on the stdlib: 16 domains, ≈148 routes' },
+      { ru: 'Работа по API с e-commerce платформой: товары, категории, короткие ссылки и заказы', en: 'Works with the e-commerce platform over its API: products, categories, short links and orders' },
       { ru: 'Деплой с Caddy и автоматическим HTTPS', en: 'Deployed with Caddy and automatic HTTPS' },
     ],
     stack: ['Go 1.25', 'Nuxt 4', 'PostgreSQL', 'S3', 'Chart.js', 'Caddy'],
     stats: [
       { value: '16', label: { ru: 'домены', en: 'domains' } },
       { value: '62', label: { ru: 'миграции', en: 'migrations' } },
-      { value: '215', label: { ru: 'коммиты, все мои', en: 'commits, all mine' } },
+      { value: '215', label: { ru: 'коммиты', en: 'commits' } },
     ],
     containers: [
       pg('18', 'crm'),
@@ -408,7 +464,7 @@ export const projects: Project[] = [
     },
     done: [
       {
-        ru: 'Виджет «Бонусная программа» в карточке заказа: резерв бонусов в ядре и скидка в CRM; если скидка не записалась, резерв отпускается',
+        ru: 'Виджет «Бонусная программа» в карточке заказа: резерв бонусов в core и скидка в CRM; если скидка не записалась, резерв отпускается',
         en: 'A loyalty widget in the order card: bonus reservation in the core plus a CRM discount; if the discount fails, the reservation is released',
       },
       {
@@ -428,7 +484,6 @@ export const projects: Project[] = [
     ],
     stack: ['Go 1.25', 'Vue 3', 'Pinia', 'TypeScript', 'PostgreSQL', 'S3'],
     stats: [
-      { value: '≈12.6k', label: { ru: 'строки Go', en: 'lines of Go' } },
       { value: '5', label: { ru: 'модули в CRM', en: 'CRM modules' } },
       { value: '88', label: { ru: 'коммиты, все мои', en: 'commits, all mine' } },
     ],
