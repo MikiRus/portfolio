@@ -268,20 +268,22 @@ export const projects: Project[] = [
       { ru: 'Логи всех сервисов в Loki: поиск по сервису, уровню и trace id', en: 'Logs from every service in Loki: search by service, level and trace id' },
       { ru: 'Дашборды Grafana: нагрузка на серверы, базы данных, количество запросов, скорость ответов и ошибки', en: 'Grafana dashboards: server load, databases, request counts, latency and errors' },
       { ru: 'Сквозные трейсы: один запрос виден целиком — gateway, core, маркетплейсы', en: 'End-to-end traces: one request is visible across gateway, core and marketplaces' },
+      { ru: 'Метрики в Prometheus и алерты в Telegram: команда узнаёт о падении сервиса или росте ошибок раньше пользователей', en: 'Metrics in Prometheus and alerts to Telegram: the team learns about a failing service or rising errors before users do' },
     ],
     architecture: [
-      { ru: 'Сервисы → OpenTelemetry SDK → OTLP gRPC → коллектор → Loki и метрики → Grafana', en: 'Services → OpenTelemetry SDK → OTLP gRPC → collector → Loki and metrics → Grafana' },
+      { ru: 'Сервисы → OpenTelemetry SDK → OTLP gRPC → коллектор → логи в Loki, метрики в Prometheus → Grafana и алерты в Telegram', en: 'Services → OpenTelemetry SDK → OTLP gRPC → collector → logs to Loki, metrics to Prometheus → Grafana and Telegram alerts' },
       { ru: 'Метрики PostgreSQL, Redis и RabbitMQ рядом с метриками сервисов: видно, где узкое место', en: 'PostgreSQL, Redis and RabbitMQ metrics next to service metrics: you see where the bottleneck is' },
       { ru: 'У каждого сервиса своё имя и версия в телеметрии, traceparent передаётся через gRPC и HTTP', en: 'Every service reports its own name and version; traceparent travels over gRPC and HTTP' },
     ],
-    stack: ['Grafana', 'Loki', 'OpenTelemetry', 'OTLP', 'Go'],
+    stack: ['Grafana', 'Loki', 'Prometheus', 'OpenTelemetry', 'Telegram-алерты', 'Go'],
     stats: [
       { value: '3', label: { ru: 'сигнала: логи, метрики, трейсы', en: 'signals: logs, metrics, traces' } },
     ],
     containers: [
       { name: 'otel-collector', image: 'otel/opentelemetry-collector-contrib', port: ':4317', logs: ['Starting GRPC server endpoint=0.0.0.0:4317', 'Everything is ready. Begin running and processing data.'] },
       { name: 'loki', image: 'grafana/loki', port: ':3100', logs: ['Loki started', 'ingester: ready'] },
-      { name: 'grafana', image: 'grafana/grafana', port: ':3000', logs: ['HTTP Server Listen address=[::]:3000', 'datasources provisioned: Loki'] },
+      { name: 'prometheus', image: 'prom/prometheus', port: ':9090', logs: ['Server is ready to receive web requests.', 'rule groups loaded: alerts'] },
+      { name: 'grafana', image: 'grafana/grafana', port: ':3000', logs: ['HTTP Server Listen address=[::]:3000', 'datasources provisioned: Loki, Prometheus', 'alerting: contact point telegram ready'] },
     ],
   },
 

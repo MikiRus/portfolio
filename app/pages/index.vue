@@ -17,18 +17,22 @@ onMounted(() => {
 <template>
   <main class="fixed inset-0 overflow-hidden transition-[background] duration-500" :style="{ background }">
     <h1 class="sr-only">{{ t('meta.title') }}</h1>
-    <MenuBar />
-    <StickyNote />
-    <DesktopIcons />
+    <!-- Версию выбирает CSS: без JS-проверки ширины не мелькает чужая раскладка. -->
+    <div class="max-md:hidden">
+      <MenuBar />
+      <StickyNote />
+      <DesktopIcons />
 
-    <AppWindow v-for="w in list" :key="w.app" :app="w.app" :label="t(`apps.${w.app}`)">
-      <FinderApp v-if="w.app === 'finder'" />
-      <DockerApp v-else-if="w.app === 'docker'" />
-      <SafariApp v-else-if="w.app === 'safari'" />
-      <SettingsApp v-else />
-    </AppWindow>
+      <AppWindow v-for="w in list" :key="w.app" :app="w.app" :label="t(`apps.${w.app}`)">
+        <FinderApp v-if="w.app === 'finder'" />
+        <DockerApp v-else-if="w.app === 'docker'" />
+        <SafariApp v-else-if="w.app === 'safari'" />
+        <SettingsApp v-else />
+      </AppWindow>
 
-    <AppDock />
+      <AppDock />
+    </div>
+    <PhoneOS class="md:hidden" />
 
     <Transition name="fade">
       <LockScreen v-if="locked" />

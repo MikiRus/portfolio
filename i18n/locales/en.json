@@ -114,5 +114,16 @@
       "graphite": "Graphite",
       "forest": "Forest"
     }
+  },
+  "phone": {
+    "apps": "Apps",
+    "about": "About me",
+    "mail": "Mail",
+    "launch": "Get",
+    "open": "Open",
+    "starting": "Starting…",
+    "logs": "Open logs in Docker",
+    "back": "Back",
+    "safariEmpty": "Start a live demo from the Demos folder — it will open here."
   }
 }
