@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "title": "Mikhail Rusanov — fullstack developer",
+    "description": "A portfolio shaped like a desktop: an e-commerce platform in Go and Laravel, Nuxt websites, CRM systems. Projects start in Docker right in the browser."
+  },
+  "lock": {
+    "hint": "Press Enter to log in",
+    "note": "No password needed — it's just a greeting",
+    "enter": "Log in"
+  },
+  "menu": {
+    "lock": "Lock Screen",
+    "settings": "Settings…",
+    "about": "About This Portfolio"
+  },
+  "folders": {
+    "ecommerce": "E-commerce",
+    "sites": "Websites",
+    "crm": "CRM",
+    "demo": "Demos"
+  },
+  "kind": {
+    "front": "Frontend",
+    "back": "Backend",
+    "full": "Front + Back"
+  },
+  "apps": {
+    "finder": "Finder",
+    "safari": "Safari",
+    "docker": "Docker",
+    "settings": "Settings"
+  },
+  "window": {
+    "close": "Close",
+    "minimize": "Minimize",
+    "maximize": "Zoom"
+  },
+  "note": {
+    "label": "Notes",
+    "title": "Hi! I'm Mikhail, a fullstack developer.",
+    "body": "Double-click a folder to see the projects. Each project first spins up in Docker, then opens in Safari."
+  },
+  "finder": {
+    "favorites": "Folders",
+    "search": "Search",
+    "items": "{n} item | {n} items",
+    "hint": "double-click to launch a project",
+    "empty": "Nothing found"
+  },
+  "docker": {
+    "containers": "Containers",
+    "stacks": "Projects",
+    "empty": "Launch a project from Finder — its containers will show up here.",
+    "compose": "docker compose · {n} container | docker compose · {n} containers",
+    "name": "Name",
+    "image": "Image",
+    "port": "Port",
+    "state": "State",
+    "logs": "Logs",
+    "stop": "Stop",
+    "start": "Start",
+    "open": "Open in Safari",
+    "sandbox": "Sandbox",
+    "sandboxNote": "This is a simulated start for now. Real time-limited containers are coming soon.",
+    "status": {
+      "pulling": "Pulling image",
+      "starting": "Starting",
+      "running": "Running",
+      "stopped": "Exited"
+    },
+    "summary": {
+      "starting": "Starting {done} of {total}",
+      "running": "Running",
+      "stopped": "Stopped"
+    }
+  },
+  "safari": {
+    "address": "Address",
+    "back": "Back",
+    "forward": "Forward",
+    "newTab": "New tab",
+    "closeTab": "Close tab",
+    "start": "Open a project from Finder or Docker."
+  },
+  "case": {
+    "role": "Role",
+    "period": "Period",
+    "stack": "Stack",
+    "task": "The task",
+    "done": "What I built",
+    "architecture": "Architecture",
+    "services": "Services in Docker",
+    "private": "The code is private — it's a commercial project. Happy to walk through parts of it in an interview.",
+    "github": "Code on GitHub"
+  },
+  "settings": {
+    "wallpaper": "Wallpaper",
+    "language": "Language",
+    "lockScreen": "Lock screen",
+    "lockNow": "Lock now",
+    "wallpapers": {
+      "sunset": "Sunset",
+      "ocean": "Ocean",
+      "graphite": "Graphite",
+      "forest": "Forest"
+    }
+  }
+}

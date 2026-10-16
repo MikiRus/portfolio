@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Onest", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-ink: #1d1d1f;
+  --color-muted: #6e6e73;
+  --color-line: #e5e5ea;
+  --color-chrome: #f6f6f8;
+  --color-sidebar: #ececf0;
+  --color-accent: #0a5bd3;
+  --color-accent-soft: #dbe7fb;
+  --color-ok: #2f9e44;
+  --color-wait: #f59f00;
+  --color-stop: #b42318;
+}
+
+html,
+body,
+#__nuxt {
+  height: 100%;
+}
+
+body {
+  @apply overflow-hidden bg-[#1c1c21] font-sans text-ink antialiased select-none;
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/40 backdrop-blur-2xl;
+  }
+  .traffic {
+    @apply grid size-3 place-items-center rounded-full;
+  }
+}

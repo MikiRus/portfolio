@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "title": "Михаил Русанов — fullstack-разработчик",
+    "description": "Портфолио в виде рабочего стола: e-commerce платформа на Go и Laravel, сайты на Nuxt, CRM-системы. Проекты запускаются в Docker прямо в браузере."
+  },
+  "lock": {
+    "hint": "Нажмите Enter, чтобы войти",
+    "note": "Пароль не нужен — это просто приветствие",
+    "enter": "Войти"
+  },
+  "menu": {
+    "lock": "Заблокировать экран",
+    "settings": "Настройки…",
+    "about": "Об этом портфолио"
+  },
+  "folders": {
+    "ecommerce": "E-commerce",
+    "sites": "Сайты",
+    "crm": "CRM",
+    "demo": "Демо"
+  },
+  "kind": {
+    "front": "Фронт",
+    "back": "Бэк",
+    "full": "Front + Back"
+  },
+  "apps": {
+    "finder": "Finder",
+    "safari": "Safari",
+    "docker": "Docker",
+    "settings": "Настройки"
+  },
+  "window": {
+    "close": "Закрыть",
+    "minimize": "Свернуть",
+    "maximize": "Развернуть"
+  },
+  "note": {
+    "label": "Заметки",
+    "title": "Привет! Я Михаил, fullstack-разработчик.",
+    "body": "Дважды кликните по папке, чтобы открыть проекты. Каждый проект сначала поднимается в Docker, потом открывается в Safari."
+  },
+  "finder": {
+    "favorites": "Папки",
+    "search": "Поиск",
+    "items": "{n} объект | {n} объекта | {n} объектов",
+    "hint": "двойной клик запускает проект",
+    "empty": "Ничего не найдено"
+  },
+  "docker": {
+    "containers": "Контейнеры",
+    "stacks": "Проекты",
+    "empty": "Запустите проект из Finder — его контейнеры появятся здесь.",
+    "compose": "docker compose · {n} контейнер | docker compose · {n} контейнера | docker compose · {n} контейнеров",
+    "name": "Имя",
+    "image": "Образ",
+    "port": "Порт",
+    "state": "Состояние",
+    "logs": "Логи",
+    "stop": "Остановить",
+    "start": "Запустить",
+    "open": "Открыть в Safari",
+    "sandbox": "Песочница",
+    "sandboxNote": "Пока это имитация запуска. Скоро здесь будут настоящие контейнеры с ограничением по времени.",
+    "status": {
+      "pulling": "Загрузка образа",
+      "starting": "Запускается",
+      "running": "Работает",
+      "stopped": "Остановлен"
+    },
+    "summary": {
+      "starting": "Запускается {done} из {total}",
+      "running": "Работает",
+      "stopped": "Остановлен"
+    }
+  },
+  "safari": {
+    "address": "Адрес",
+    "back": "Назад",
+    "forward": "Вперёд",
+    "newTab": "Новая вкладка",
+    "closeTab": "Закрыть вкладку",
+    "start": "Откройте проект из Finder или Docker."
+  },
+  "case": {
+    "role": "Роль",
+    "period": "Период",
+    "stack": "Стек",
+    "task": "Задача",
+    "done": "Что я сделал",
+    "architecture": "Архитектура",
+    "services": "Сервисы в Docker",
+    "private": "Код закрыт — проект коммерческий. Могу показать фрагменты на собеседовании.",
+    "github": "Код на GitHub"
+  },
+  "settings": {
+    "wallpaper": "Обои",
+    "language": "Язык",
+    "lockScreen": "Экран входа",
+    "lockNow": "Заблокировать сейчас",
+    "wallpapers": {
+      "sunset": "Закат",
+      "ocean": "Океан",
+      "graphite": "Графит",
+      "forest": "Лес"
+    }
+  }
+}
