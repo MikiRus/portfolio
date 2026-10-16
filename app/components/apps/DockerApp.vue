@@ -14,6 +14,7 @@ const project = computed(() => (selected.value ? projectById(selected.value) : u
 const done = computed(() => stack.value?.containers.filter((c) => c.status === 'running').length ?? 0)
 
 const dot: Record<ContainerStatus | StackStatus, string> = {
+  waiting: 'bg-[#dee2e6]',
   pulling: 'bg-[#adb5bd]',
   starting: 'bg-wait animate-pulse',
   running: 'bg-ok',
@@ -36,9 +37,21 @@ watch(
 
 function openSafari() {
   if (!selected.value) return
-  show(selected.value)
+  show(selected.value, stack.value?.sandbox ? 'demo' : 'about')
   open('safari')
 }
+
+// Обратный отсчёт до остановки песочницы без активности.
+const now = ref(Date.now())
+let tick: ReturnType<typeof setInterval> | undefined
+onMounted(() => (tick = setInterval(() => (now.value = Date.now()), 1000)))
+onBeforeUnmount(() => clearInterval(tick))
+const left = computed(() => {
+  const exp = stack.value?.sandbox?.expiresAt
+  if (!exp) return ''
+  const s = Math.max(0, Math.round((new Date(exp).getTime() - now.value) / 1000))
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
+})
 </script>
 
 <template>
@@ -58,7 +71,8 @@ function openSafari() {
     <span class="flex-1" />
     <div class="rounded-lg bg-white p-2.5 text-[11px] leading-snug text-[#3a3a3c] ring-1 ring-[#e1e5ec] ring-inset">
       <strong class="block text-xs text-ink">{{ t('docker.sandbox') }}</strong>
-      {{ t('docker.sandboxNote') }}
+      {{ project?.sandbox ? t('docker.live') : t('docker.sandboxNote') }}
+      <span v-if="left && stack?.status === 'running'" class="mt-1.5 block font-medium text-ink tabular-nums">{{ t('docker.expires', { time: left }) }}</span>
     </div>
   </nav>
 
@@ -89,6 +103,9 @@ function openSafari() {
     </div>
 
     <template v-if="stack && project">
+      <p v-if="stack.notice" class="mx-5 mt-3 rounded-lg bg-[#fff4db] px-3.5 py-2.5 text-[13px] text-[#8a5300]" role="status">
+        {{ t(stack.notice.key, { minutes: stack.notice.minutes }) }}
+      </p>
       <div class="overflow-x-auto px-5 py-2 text-[13px]">
         <table class="w-full min-w-[520px]">
           <thead>

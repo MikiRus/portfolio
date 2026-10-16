@@ -23,6 +23,8 @@ export interface Project {
   url: string
   // Публичный репозиторий owner/name — для звёзд и последнего коммита из GitHub API.
   repo?: string
+  // Шаблон сервиса песочниц: проект запускается по-настоящему и открывается в iframe.
+  sandbox?: string
   period: Localized
   role: Localized
   tagline: Localized

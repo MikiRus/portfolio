@@ -171,6 +171,47 @@ export const projects: Project[] = [
     ],
   },
 
+  {
+    id: 'admin',
+    folder: 'ecommerce',
+    name: 'admin',
+    short: 'Ad',
+    colors: ['#c2410c', '#fe8a4a'],
+    kind: 'front',
+    url: 'localhost:3000',
+    sandbox: 'admin',
+    period: { ru: '2025 — сейчас', en: '2025 — present' },
+    role: { ru: 'Фронтенд-разработчик, один из основных авторов', en: 'Frontend developer, one of the core authors' },
+    tagline: {
+      ru: 'Админка e-commerce платформы: каталог, заказы, лояльность, 9 маркетплейсов, роли и мониторинг сервисов в одном интерфейсе',
+      en: 'The e-commerce platform admin: catalog, orders, loyalty, 9 marketplaces, roles and service monitoring in one interface',
+    },
+    task: {
+      ru: 'Дать команде один интерфейс ко всему ядру и его сервисам: от карточки товара до передачи остатков на маркетплейсы, с правами по ролям. Демо — копия меню и сценариев на выдуманных данных: его можно потрогать.',
+      en: "Give the team one interface to the whole core and its services, from product cards to pushing stock to marketplaces, with role-based access. The demo mirrors the menu and flows on made-up data — you can actually click through it.",
+    },
+    done: [
+      { ru: 'Разделы маркетплейсов: кабинеты, передача остатков, журнал синхронизаций и заказы по каждому каналу', en: 'Marketplace sections: accounts, stock push, sync log and orders per channel' },
+      { ru: 'Лояльность: бонусные счета с лотами и историей, ручные начисления, подарочные сертификаты, правила списания', en: 'Loyalty: bonus accounts with lots and history, manual accruals, gift certificates, redemption rules' },
+      { ru: 'Короткие ссылки с QR-кодами и статистикой переходов, клиенты API с лимитами', en: 'Short links with QR codes and click stats, API clients with rate limits' },
+      { ru: 'Состояние сервисов: живая проверка ядра, хранилищ и внешних интеграций', en: 'Service health: a live check of the core, storage and external integrations' },
+    ],
+    architecture: [
+      { ru: 'Nuxt 4 SPA + Nuxt UI 4, Nitro как BFF к gateway', en: 'Nuxt 4 SPA + Nuxt UI 4, Nitro as a BFF to the gateway' },
+      { ru: 'Меню и права из одного описания: пункт виден, только если у роли есть разрешение', en: 'Menu and permissions from one definition: an item shows only if the role has the permission' },
+      { ru: 'В демо данные живут в памяти Nitro: правки сохраняются, пока жива песочница', en: 'In the demo, data lives in Nitro memory: edits persist while the sandbox is alive' },
+    ],
+    stack: ['Nuxt 4', 'Nuxt UI 4', 'Vue 3', 'TypeScript', 'Tailwind 4', 'Nitro BFF'],
+    stats: [
+      { value: '74', label: { ru: 'страницы', en: 'pages' } },
+      { value: '35', label: { ru: 'пункты меню', en: 'menu items' } },
+      { value: '101', label: { ru: 'мои коммиты', en: 'my commits' } },
+    ],
+    containers: [
+      { name: 'web', image: 'demo-admin-web', port: ':3000', logs: ['Listening on http://0.0.0.0:3000'] },
+    ],
+  },
+
   // ─── Сайты ────────────────────────────────────────────────────
   {
     id: 'garlyn',
@@ -368,6 +409,7 @@ export const projects: Project[] = [
     colors: ['#5b3fd9', '#a78bfa'],
     kind: 'full',
     url: 'localhost:3000',
+    sandbox: 'blogger-crm',
     period: { ru: 'октябрь 2026', en: 'Oct 2026' },
     role: { ru: 'Сделано с нуля для портфолио', en: 'Built from scratch for this portfolio' },
     tagline: {
@@ -393,9 +435,9 @@ export const projects: Project[] = [
       { value: '180', label: { ru: 'дни отчётов', en: 'days of reports' } },
     ],
     containers: [
-      pg('18', 'crm'),
+      { name: 'postgres', image: 'postgres:18-alpine', logs: ['database system is ready to accept connections'] },
       { name: 'api', image: 'blogger-crm-demo-api', port: ':8080', logs: ['migration applied: 002_ozon_users.sql', 'demo data seeded bloggers=36 campaigns=10', 'listening addr=:8080'] },
-      { name: 'worker', image: 'blogger-crm-demo-worker', logs: ['worker started every=30s', 'отчёт по продажам запрошен'] },
+      { name: 'worker', image: 'blogger-crm-demo-api', logs: ['worker started every=30s', 'отчёт по продажам запрошен'] },
       { name: 'web', image: 'blogger-crm-demo-web', port: ':3000', logs: ['Listening on http://0.0.0.0:3000'] },
     ],
   },

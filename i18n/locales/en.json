@@ -66,13 +66,19 @@
       "pulling": "Pulling image",
       "starting": "Starting",
       "running": "Running",
-      "stopped": "Exited"
+      "stopped": "Exited",
+      "waiting": "Waiting"
     },
     "summary": {
       "starting": "Starting {done} of {total}",
       "running": "Running",
       "stopped": "Stopped"
-    }
+    },
+    "busy": "All sandboxes are busy — the next one frees up in about {minutes} min. Showing the project page for now.",
+    "busyIp": "Your address already runs the maximum number of sandboxes. Stop one to start another.",
+    "failed": "The stack didn't start. Showing the project page — please try again a bit later.",
+    "live": "Real containers: a separate stack for every visitor, with no internet access.",
+    "expires": "Stops in {time} without activity"
   },
   "safari": {
     "address": "Address",
@@ -80,7 +86,11 @@
     "forward": "Forward",
     "newTab": "New tab",
     "closeTab": "Close tab",
-    "start": "Open a project from Finder or Docker."
+    "start": "Open a project from Finder or Docker.",
+    "demo": "Demo",
+    "about": "About",
+    "stopped": "The sandbox has stopped.",
+    "restart": "Start again"
   },
   "case": {
     "role": "Role",

@@ -3,10 +3,13 @@ import type { Project } from '~/data/types'
 export function useSafari() {
   const tabs = useState<string[]>('safari-tabs', () => [])
   const current = useState<string | null>('safari-current', () => null)
+  // Что открыто во вкладке проекта с живым демо: само демо или страница кейса.
+  const view = useState<Record<string, 'demo' | 'about'>>('safari-view', () => ({}))
 
-  function show(projectId: string) {
+  function show(projectId: string, mode: 'demo' | 'about' = 'about') {
     if (!tabs.value.includes(projectId)) tabs.value.push(projectId)
     current.value = projectId
+    view.value[projectId] = mode
   }
 
   function closeTab(projectId: string) {
@@ -16,7 +19,7 @@ export function useSafari() {
     if (current.value === projectId) current.value = tabs.value[Math.min(i, tabs.value.length - 1)] ?? null
   }
 
-  return { tabs, current, show, closeTab }
+  return { tabs, current, view, show, closeTab }
 }
 
 // Единый сценарий для любого проекта: сначала Docker поднимает контейнеры,
@@ -28,8 +31,8 @@ export function useLaunch() {
 
   async function launch(project: Project) {
     windows.open('docker')
-    await start(project)
-    safari.show(project.id)
+    const result = await start(project)
+    safari.show(project.id, result === 'live' ? 'demo' : 'about')
     windows.open('safari')
   }
 

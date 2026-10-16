@@ -1,0 +1,75 @@
+# Продакшн-стек портфолио: Caddy (HTTPS) → портфолио на Nuxt и сервис песочниц.
+# Образы демо должны быть собраны на сервере заранее, см. README.
+name: portfolio
+
+services:
+  caddy:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    environment:
+      # Домен портфолио; SITE_ADDRESS=:80 — локально без HTTPS.
+      SITE_ADDRESS: ${SITE_ADDRESS:-mikkirus.dev}
+    ports:
+      - "${HTTP_PORT:-80}:80"
+      - "${HTTPS_PORT:-443}:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+    networks: [edge]
+    depends_on: [portfolio, sandbox]
+
+  portfolio:
+    build: ..
+    restart: unless-stopped
+    networks: [edge]
+
+  sandbox:
+    build: ../sandbox
+    restart: unless-stopped
+    # Имя фиксировано: сервис подключает сам себя к сетям песочниц по нему.
+    container_name: portfolio-sandbox
+    environment:
+      DOCKER_HOST: tcp://docker-proxy:2375
+      SANDBOX_SELF: portfolio-sandbox
+      TRUST_PROXY: "true"
+      SANDBOX_MAX: ${SANDBOX_MAX:-5}
+      SANDBOX_PER_IP: ${SANDBOX_PER_IP:-2}
+      SANDBOX_IDLE_TTL: ${SANDBOX_IDLE_TTL:-15m}
+      SANDBOX_MAX_TTL: ${SANDBOX_MAX_TTL:-60m}
+      DEMO_API_IMAGE: ${DEMO_API_IMAGE:-blogger-crm-demo-api}
+      DEMO_WEB_IMAGE: ${DEMO_WEB_IMAGE:-blogger-crm-demo-web}
+      DEMO_ADMIN_IMAGE: ${DEMO_ADMIN_IMAGE:-demo-admin-web}
+    networks: [edge, docker]
+    depends_on: [docker-proxy]
+    deploy:
+      resources:
+        limits: { cpus: "0.5", memory: 64M }
+
+  # Сервис песочниц не видит docker.sock напрямую: прокси пропускает
+  # только API контейнеров и сетей, без образов, томов, exec и swarm.
+  docker-proxy:
+    image: tecnativa/docker-socket-proxy:v0.4.1
+    restart: unless-stopped
+    environment:
+      CONTAINERS: 1
+      NETWORKS: 1
+      POST: 1
+      DELETE: 1
+      ALLOW_START: 1
+      ALLOW_STOP: 1
+      ALLOW_RESTARTS: 0
+      EXEC: 0
+      IMAGES: 0
+      VOLUMES: 0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks: [docker]
+
+networks:
+  edge:
+  # Сеть до docker-proxy закрыта от остальных сервисов и интернета.
+  docker:
+    internal: true
+
+volumes:
+  caddy_data:

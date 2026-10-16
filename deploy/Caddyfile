@@ -1,0 +1,23 @@
+{$SITE_ADDRESS} {
+	encode zstd gzip
+
+	# API песочниц и сами демо идут в сервис песочниц.
+	# flush_interval -1 — не буферизовать поток логов (SSE).
+	@sandbox path /api/sandbox* /s/*
+	handle @sandbox {
+		reverse_proxy sandbox:8080 {
+			flush_interval -1
+		}
+	}
+
+	handle {
+		reverse_proxy portfolio:3000
+	}
+
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		# Демо открывается во фрейме только у нас самих.
+		Content-Security-Policy "frame-ancestors 'self'"
+	}
+}

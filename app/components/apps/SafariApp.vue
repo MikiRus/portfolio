@@ -2,8 +2,18 @@
 import { projectById } from '~/data/projects'
 
 const { t } = useI18n()
-const { tabs, current, closeTab } = useSafari()
+const { tabs, current, view, closeTab } = useSafari()
+const { stacks } = useStacks()
+const { launch } = useLaunch()
 const project = computed(() => (current.value ? projectById(current.value) : undefined))
+
+// Живое демо есть, пока песочница проекта запущена.
+const live = computed(() => (current.value ? stacks.value[current.value]?.sandbox : undefined))
+const mode = computed(() => (project.value?.sandbox && current.value ? (view.value[current.value] ?? 'about') : 'about'))
+const address = computed(() => {
+  if (mode.value === 'demo' && live.value) return `${location.host}${live.value.url}`
+  return project.value?.url ?? ''
+})
 
 // Новая вкладка — страница кейса заново с прокруткой наверх.
 const page = useTemplateRef<HTMLElement>('page')
@@ -21,10 +31,22 @@ watch(current, () => page.value?.scrollTo({ top: 0 }))
       <div class="flex min-w-0 flex-1 justify-center">
         <div class="flex w-full max-w-md min-w-0 items-center justify-center gap-2 rounded-lg bg-[#e9e9ee] px-3 py-1.5 text-[13px] text-[#3a3a3c]" :aria-label="t('safari.address')">
           <svg v-if="project" width="11" height="13" viewBox="0 0 11 13" aria-hidden="true"><rect x="1" y="6" width="9" height="6.5" rx="1.5" fill="#6e6e73" /><path d="M3 6V4a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="#6e6e73" stroke-width="1.4" /></svg>
-          <span class="truncate select-text">{{ project?.url ?? '' }}</span>
+          <span class="truncate select-text">{{ address }}</span>
         </div>
       </div>
-      <span class="w-[52px] max-sm:hidden" />
+      <div v-if="project?.sandbox" class="flex rounded-lg bg-[#e9e9ee] p-0.5 text-xs" role="group">
+        <button
+          v-for="m in ['demo', 'about'] as const"
+          :key="m"
+          class="rounded-md px-2.5 py-1"
+          :class="mode === m ? 'bg-white font-semibold shadow-sm' : 'text-muted'"
+          :aria-pressed="mode === m"
+          @click="view[project.id] = m"
+        >
+          {{ t(`safari.${m}`) }}
+        </button>
+      </div>
+      <span v-else class="w-[52px] max-sm:hidden" />
     </div>
 
     <div v-if="tabs.length > 1" class="flex h-[30px] shrink-0 border-b border-line bg-[#ececf0] text-xs" role="tablist">
@@ -48,7 +70,16 @@ watch(current, () => page.value?.scrollTo({ top: 0 }))
     </div>
 
     <div ref="page" class="@container min-h-0 flex-1 overflow-y-auto bg-white select-text">
-      <CasePage v-if="project" :key="project.id" :project="project" />
+      <template v-if="project && mode === 'demo'">
+        <iframe v-if="live" :key="live.id" :src="live.url" :title="project.name" class="block h-full w-full border-0" />
+        <div v-else class="grid h-full place-items-center p-6 text-center text-sm text-muted">
+          <div>
+            <p>{{ t('safari.stopped') }}</p>
+            <button class="mt-3 rounded-lg bg-accent px-3.5 py-2 font-semibold text-white hover:bg-[#084aad]" @click="launch(project)">{{ t('safari.restart') }}</button>
+          </div>
+        </div>
+      </template>
+      <CasePage v-else-if="project" :key="project.id" :project="project" />
       <p v-else class="grid h-full place-items-center p-6 text-sm text-muted">{{ t('safari.start') }}</p>
     </div>
   </div>

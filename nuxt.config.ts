@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   vite: { plugins: [tailwindcss()] },
   i18n: {
     defaultLocale: 'ru',
+    baseUrl: 'https://mikkirus.dev',
     strategy: 'prefix_except_default',
     locales: [
       { code: 'ru', language: 'ru-RU', name: 'Русский', file: 'ru.json' },
