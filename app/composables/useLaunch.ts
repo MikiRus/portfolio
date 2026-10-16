@@ -22,14 +22,19 @@ export function useSafari() {
   return { tabs, current, view, show, closeTab }
 }
 
-// Единый сценарий для любого проекта: сначала Docker поднимает контейнеры,
-// потом проект открывается в Safari.
+// Живые демо сначала поднимаются в Docker и открываются в Safari уже запущенными.
+// Остальные проекты (код коммерческий) сразу открываются в Safari страницей кейса.
 export function useLaunch() {
   const windows = useWindows()
   const { start } = useStacks()
   const safari = useSafari()
 
   async function launch(project: Project) {
+    if (!project.sandbox) {
+      safari.show(project.id, 'about')
+      windows.open('safari')
+      return
+    }
     windows.open('docker')
     const result = await start(project)
     safari.show(project.id, result === 'live' ? 'demo' : 'about')

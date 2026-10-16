@@ -71,7 +71,7 @@ const left = computed(() => {
     <span class="flex-1" />
     <div class="rounded-lg bg-white p-2.5 text-[11px] leading-snug text-[#3a3a3c] ring-1 ring-[#e1e5ec] ring-inset">
       <strong class="block text-xs text-ink">{{ t('docker.sandbox') }}</strong>
-      {{ project?.sandbox ? t('docker.live') : t('docker.sandboxNote') }}
+      {{ t('docker.live') }}
       <span v-if="left && stack?.status === 'running'" class="mt-1.5 block font-medium text-ink tabular-nums">{{ t('docker.expires', { time: left }) }}</span>
     </div>
   </nav>

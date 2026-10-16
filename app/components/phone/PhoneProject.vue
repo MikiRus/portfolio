@@ -38,6 +38,7 @@ const button = computed(() => {
           <span class="flex-1" />
           <div class="mt-2 flex items-center gap-2">
             <button
+              v-if="project.sandbox"
               class="min-w-[104px] rounded-full px-4 py-1.5 text-[13px] font-bold uppercase disabled:opacity-80"
               :class="ready && !stack?.sandbox ? 'bg-[#f2f2f7] text-ink' : 'bg-accent text-white'"
               :disabled="starting || (ready && !stack?.sandbox)"
@@ -50,7 +51,7 @@ const button = computed(() => {
         </div>
       </div>
 
-      <div v-if="stack" class="mt-5 rounded-2xl bg-[#f5f5f7] p-3.5 text-[13px]" role="status">
+      <div v-if="project.sandbox && stack" class="mt-5 rounded-2xl bg-[#f5f5f7] p-3.5 text-[13px]" role="status">
         <div class="flex items-center justify-between">
           <strong>{{ t('docker.sandbox') }}</strong>
           <span class="font-semibold" :class="ready ? 'text-ok' : stack.status === 'stopped' ? 'text-muted' : 'text-[#8a5300]'">

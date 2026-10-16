@@ -38,19 +38,19 @@
   "note": {
     "label": "Notes",
     "title": "Hi! I'm Mikhail, a fullstack developer.",
-    "body": "Double-click a folder to see the projects. Each project first spins up in Docker, then opens in Safari."
+    "body": "Double-click a folder to see the projects — they open in Safari. Live demos in the Demos folder first spin up in Docker, so you can actually try them."
   },
   "finder": {
     "favorites": "Folders",
     "search": "Search",
     "items": "{n} item | {n} items",
-    "hint": "double-click to launch a project",
+    "hint": "double-click to open a project",
     "empty": "Nothing found"
   },
   "docker": {
     "containers": "Containers",
     "stacks": "Projects",
-    "empty": "Launch a project from Finder — its containers will show up here.",
+    "empty": "Start a live demo from the Demos folder — its containers will show up here.",
     "compose": "docker compose · {n} container | docker compose · {n} containers",
     "name": "Name",
     "image": "Image",
@@ -61,7 +61,6 @@
     "start": "Start",
     "open": "Open in Safari",
     "sandbox": "Sandbox",
-    "sandboxNote": "This start is simulated: the code is commercial and private. Live demos that really start are in the Demos folder.",
     "status": {
       "pulling": "Pulling image",
       "starting": "Starting",
