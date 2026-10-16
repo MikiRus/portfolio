@@ -180,6 +180,7 @@ export const projects: Project[] = [
     kind: 'front',
     url: 'localhost:3000',
     sandbox: 'admin',
+    repo: 'MikiRus/demo-admin',
     period: { ru: '2025 — сейчас', en: '2025 — present' },
     role: { ru: 'Фронтенд-разработчик, один из основных авторов', en: 'Frontend developer, one of the core authors' },
     tagline: {
@@ -410,6 +411,7 @@ export const projects: Project[] = [
     kind: 'full',
     url: 'localhost:3000',
     sandbox: 'blogger-crm',
+    repo: 'MikiRus/demo-blogger-crm',
     period: { ru: 'октябрь 2026', en: 'Oct 2026' },
     role: { ru: 'Сделано с нуля для портфолио', en: 'Built from scratch for this portfolio' },
     tagline: {

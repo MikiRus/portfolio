@@ -44,9 +44,19 @@ npm run build && node .output/server/index.mjs
 
 ## Деплой
 
+Пуш в `main` любого из репозиториев (`portfolio`, `demo-blogger-crm`, `demo-admin`)
+запускает GitHub Actions: проверки, затем `ssh root@сервер <проект>`. Ключ CI в
+`authorized_keys` привязан к [`deploy/deploy.sh`](deploy/deploy.sh) (`command=...`),
+так что он умеет только подтянуть `main` и пересобрать нужный проект.
+
+Первичная настройка сервера:
+
 ```bash
+for r in portfolio demo-blogger-crm demo-admin; do git clone https://github.com/MikiRus/$r /opt/$r; done
+cp /opt/portfolio/deploy/deploy.sh /opt/deploy.sh
 # образы демо: песочница не умеет их собирать или скачивать
 cd /opt/demo-blogger-crm && docker compose build api web && docker pull postgres:18-alpine
+cd /opt/demo-admin && docker build -t demo-admin-web .
 # портфолио, сервис песочниц и Caddy
 cd /opt/portfolio/deploy && cp .env.example .env && docker compose up -d --build
 ```
