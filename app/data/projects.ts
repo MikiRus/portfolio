@@ -179,8 +179,6 @@ export const projects: Project[] = [
     colors: ['#c2410c', '#fe8a4a'],
     kind: 'front',
     url: 'localhost:3000',
-    sandbox: 'admin',
-    repo: 'MikiRus/demo-admin',
     period: { ru: '2025 — сейчас', en: '2025 — present' },
     role: { ru: 'Фронтенд-разработчик, один из основных авторов', en: 'Frontend developer, one of the core authors' },
     tagline: {
@@ -188,8 +186,8 @@ export const projects: Project[] = [
       en: 'The e-commerce platform admin: catalog, orders, loyalty, 9 marketplaces, roles and service monitoring in one interface',
     },
     task: {
-      ru: 'Дать команде один интерфейс ко всему ядру и его сервисам: от карточки товара до передачи остатков на маркетплейсы, с правами по ролям. Демо — копия меню и сценариев на выдуманных данных: его можно потрогать.',
-      en: "Give the team one interface to the whole core and its services, from product cards to pushing stock to marketplaces, with role-based access. The demo mirrors the menu and flows on made-up data — you can actually click through it.",
+      ru: 'Дать команде один интерфейс ко всему ядру и его сервисам: от карточки товара до передачи остатков на маркетплейсы, с правами по ролям. Живая копия меню на выдуманных данных — в папке «Демо», ecommerce-demo.',
+      en: 'Give the team one interface to the whole core and its services, from product cards to pushing stock to marketplaces, with role-based access. A live copy of the menu on made-up data is in the Demos folder: ecommerce-demo.',
     },
     done: [
       { ru: 'Разделы маркетплейсов: кабинеты, передача остатков, журнал синхронизаций и заказы по каждому каналу', en: 'Marketplace sections: accounts, stock push, sync log and orders per channel' },
@@ -200,7 +198,7 @@ export const projects: Project[] = [
     architecture: [
       { ru: 'Nuxt 4 SPA + Nuxt UI 4, Nitro как BFF к gateway', en: 'Nuxt 4 SPA + Nuxt UI 4, Nitro as a BFF to the gateway' },
       { ru: 'Меню и права из одного описания: пункт виден, только если у роли есть разрешение', en: 'Menu and permissions from one definition: an item shows only if the role has the permission' },
-      { ru: 'В демо данные живут в памяти Nitro: правки сохраняются, пока жива песочница', en: 'In the demo, data lives in Nitro memory: edits persist while the sandbox is alive' },
+      { ru: 'Карта состояния сервисов опрашивает gateway: видно, какой сервис лежит и почему', en: 'The service health map polls the gateway: you see which service is down and why' },
     ],
     stack: ['Nuxt 4', 'Nuxt UI 4', 'Vue 3', 'TypeScript', 'Tailwind 4', 'Nitro BFF'],
     stats: [
@@ -209,7 +207,46 @@ export const projects: Project[] = [
       { value: '101', label: { ru: 'мои коммиты', en: 'my commits' } },
     ],
     containers: [
-      { name: 'web', image: 'demo-admin-web', port: ':3000', logs: ['Listening on http://0.0.0.0:3000'] },
+      { name: 'admin', image: 'garlyn/admin', port: ':3000', logs: ['Nitro BFF → gateway:8080', 'Listening on http://0.0.0.0:3000'] },
+    ],
+  },
+  {
+    id: 'short-link',
+    folder: 'ecommerce',
+    name: 'short-link',
+    short: 'Sl',
+    colors: ['#0f766e', '#2dd4bf'],
+    kind: 'full',
+    url: 'l.garlyn.ru',
+    period: { ru: '2026 — сейчас', en: '2026 — present' },
+    role: { ru: 'Интеграция в платформу: маршруты gateway, права, раздел админки', en: 'Platform integration: gateway routes, permissions, admin section' },
+    tagline: {
+      ru: 'Короткие ссылки l.garlyn.ru с QR-кодами для коробок и инструкций и статистикой переходов',
+      en: 'l.garlyn.ru short links with QR codes for boxes and manuals, plus click analytics',
+    },
+    task: {
+      ru: 'На коробку, инструкцию или промо-материал нужен QR, который ведёт в нужное место и который можно перенастроить без перепечатки. И видеть, сколько людей реально по нему перешли.',
+      en: 'Boxes, manuals and promo materials need a QR code that leads to the right place and can be repointed without reprinting — and the team wants to see how many people actually scanned it.',
+    },
+    done: [
+      { ru: 'Раздел «Короткие ссылки» в админке: создание, подбор свободного кода, комментарий для канала, правка адреса без смены QR', en: 'A short-links section in the admin: create links, suggest a free code, tag the channel, change the target without changing the QR' },
+      { ru: 'Скачивание QR-кода файлом для печати на коробках и в инструкциях', en: 'QR code download as a file for printing on boxes and manuals' },
+      { ru: 'Статистика: переходы людей и ботов отдельно, график по дням, источники и последние переходы', en: 'Analytics: humans and bots counted separately, a daily chart, sources and latest visits' },
+      { ru: 'Маршруты в gateway с правами short_link.view и short_link.manage и проверка сервиса на карте состояния', en: 'Gateway routes with short_link.view and short_link.manage permissions, plus the service on the health map' },
+    ],
+    architecture: [
+      { ru: 'Отдельный сервис за gateway: админка ходит через общий API с RBAC', en: 'A separate service behind the gateway: the admin talks to it through the shared RBAC-protected API' },
+      { ru: 'Смотреть статистику можно шире, чем заводить ссылки: два разных права', en: 'Viewing stats is allowed more widely than creating links: two separate permissions' },
+      { ru: 'QR отдаётся файлом: BFF пробрасывает байты и заголовки, чтобы браузер сохранил картинку, а не JSON', en: 'The QR is served as a file: the BFF passes bytes and headers through so the browser saves an image, not JSON' },
+    ],
+    stack: ['Nuxt 4', 'Nuxt UI 4', 'Go gateway', 'RBAC', 'QR'],
+    stats: [
+      { value: '6', label: { ru: 'маршруты API', en: 'API routes' } },
+      { value: '2', label: { ru: 'права доступа', en: 'permissions' } },
+    ],
+    containers: [
+      { name: 'short-link', image: 'garlyn/short-link', port: ':8080', logs: ['redirects loaded', 'listening on :8080'] },
+      { name: 'gateway', image: 'garlyn/gateway', port: ':8081', logs: ['route /admin/v1/short-link/* → short-link:8080'] },
     ],
   },
 
@@ -271,10 +308,10 @@ export const projects: Project[] = [
     name: 'stoewer.ru',
     short: 'St',
     colors: ['#343a40', '#868e96'],
-    kind: 'front',
+    kind: 'full',
     url: 'stoewer.ru',
     period: { ru: '2025 — сейчас', en: '2025 — present' },
-    role: { ru: 'Фронтенд-разработчик в команде', en: 'Frontend developer on the team' },
+    role: { ru: 'Разработчик в команде: витрина, админка и их BFF', en: 'Developer on the team: storefront, admin and their BFF' },
     tagline: {
       ru: 'Витрина и админка на Nuxt поверх общего Go-бэкенда: каталог, корзина, checkout, кабинет, лояльность',
       en: 'A Nuxt storefront and admin panel on top of the shared Go backend: catalog, cart, checkout, account, loyalty',
@@ -353,7 +390,7 @@ export const projects: Project[] = [
   },
   {
     id: 'retailcrm-helper',
-    folder: 'crm',
+    folder: 'ecommerce',
     name: 'retailcrm-helper',
     short: 'Rc',
     colors: ['#7048e8', '#b197fc'],
@@ -441,6 +478,46 @@ export const projects: Project[] = [
       { name: 'api', image: 'blogger-crm-demo-api', port: ':8080', logs: ['migration applied: 002_ozon_users.sql', 'demo data seeded bloggers=36 campaigns=10', 'listening addr=:8080'] },
       { name: 'worker', image: 'blogger-crm-demo-api', logs: ['worker started every=30s', 'отчёт по продажам запрошен'] },
       { name: 'web', image: 'blogger-crm-demo-web', port: ':3000', logs: ['Listening on http://0.0.0.0:3000'] },
+    ],
+  },
+  {
+    id: 'ecommerce-demo',
+    folder: 'demo',
+    name: 'ecommerce-demo',
+    short: 'Ec',
+    colors: ['#c2410c', '#fe8a4a'],
+    kind: 'full',
+    url: 'localhost:3000',
+    sandbox: 'admin',
+    repo: 'MikiRus/demo-admin',
+    period: { ru: 'октябрь 2026', en: 'Oct 2026' },
+    role: { ru: 'Сделано с нуля для портфолио', en: 'Built from scratch for this portfolio' },
+    tagline: {
+      ru: 'Админка e-commerce платформы на выдуманных данных — её можно потрогать',
+      en: 'The e-commerce platform admin on made-up data — you can actually try it',
+    },
+    task: {
+      ru: 'Показать настоящую админку (кейс admin в папке E-commerce) без доступа к боевым данным: то же меню из 35 разделов, живые сценарии и данные, которые можно менять.',
+      en: 'Show the real admin (the admin case in the E-commerce folder) without production data: the same 35-section menu, live flows and data you can change.',
+    },
+    done: [
+      { ru: 'Заказы со сменой статуса и историей, бонусные счета с ручными начислениями', en: 'Orders with status changes and history, bonus accounts with manual accruals' },
+      { ru: 'Передача остатков на маркетплейс пачками: видно лимит запросов, 429 и повторы', en: 'Stock push to a marketplace in batches: rate limit, 429s and retries are visible' },
+      { ru: 'Короткие ссылки с QR-кодом и графиком переходов', en: 'Short links with a QR code and a click chart' },
+      { ru: 'Матрица прав по ролям и мониторинг сервисов в реальном времени', en: 'A role permission matrix and live service monitoring' },
+    ],
+    architecture: [
+      { ru: 'Nuxt 4 SPA + Nuxt UI 4, один движок таблиц на 20 разделов', en: 'Nuxt 4 SPA + Nuxt UI 4, one table engine for 20 sections' },
+      { ru: 'Данные генерируются детерминированно и живут в памяти Nitro, пока жива песочница', en: 'Data is generated deterministically and lives in Nitro memory while the sandbox is alive' },
+      { ru: 'Работает без интернета: иконки и шрифты в бандле', en: 'Works offline: icons and fonts are bundled' },
+    ],
+    stack: ['Nuxt 4', 'Nuxt UI 4', 'TypeScript', 'Tailwind 4', 'Docker'],
+    stats: [
+      { value: '35', label: { ru: 'пункты меню', en: 'menu items' } },
+      { value: '1', label: { ru: 'контейнер', en: 'container' } },
+    ],
+    containers: [
+      { name: 'web', image: 'demo-admin-web', port: ':3000', logs: ['Listening on http://0.0.0.0:3000'] },
     ],
   },
 ]
